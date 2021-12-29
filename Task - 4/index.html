@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of countries</title>
+</head>
+<body>
+   <h1>List of countries </h1>
+<u1 id="list">
+    <li> united states</li>
+    <li> Germany</li>
+    <li> china</li>
+</u1>
+
+</body>
+    
+    <!-- <script src="index.js"> -->
+<script type = "text/javascript">
+var xhttp = new XMLHttpRequest();
+var respJSON = [];
+xhttp.onreadystatechange = function(){
+if(this.readystate == 4 && this.status ==200) {
+
+    resp = this.responseText;
+    respJSON = JSON.parse(resp);
+    // console.log(respJSON[0].name);
+html = document.getElementById("list");
+html.innerHTML = "";
+
+for(var i=0; i<respJSON.Length; i++){
+    html.innerHTML += "<li id="+i+"onclick='clickMe("+i+")'>" + respJSON[i].name + "</li>"
+   }
+  }
+ }
+xhttp.open("GET", "https://restcountries.eu/", true);
+xhttp.send();
+  
+  function clickMe(index){
+    li = document.getElementById(index);
+     img = document.createElement("img");
+      img.src = respJSON[index].flag;
+       li.append(img);
+
+    //   alert("Testing");
+  }
+  </script>
+</html>
